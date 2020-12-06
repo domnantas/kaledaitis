@@ -2,7 +2,7 @@ datasource DS {
   // optionally set multiple providers
   // example: provider = ["sqlite", "postgresql"]
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -11,8 +11,7 @@ generator client {
 }
 
 model User {
-  id         String @id @default(uuid())
-  name       String
-  sharedWith User[] @relation("kaledaitis", references: [id])
-  takenFrom  User[] @relation("kaledaitis", references: [id])
+  id       String  @id @default(uuid())
+  name     String
+  students User[]
 }
