@@ -14,8 +14,8 @@ const CREATE_USER_MUTATION = gql`
 const HomePage = () => {
   // If I already have an user (kaledaitis), redirect to UserPage
   React.useEffect(() => {
-    const userId = localStorage.getItem('userId')
-    if (userId) navigate(routes.user({ id: userId }))
+    const currentUserId = localStorage.getItem('userId')
+    if (currentUserId) navigate(routes.user({ id: currentUserId }))
   })
 
   const [createUser, { loading, error }] = useMutation(CREATE_USER_MUTATION, {
