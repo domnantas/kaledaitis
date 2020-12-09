@@ -31,7 +31,7 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>HomePage</h1>
+      <h1>Kalėdaitis</h1>
       <UserForm onSave={onSave} loading={loading} error={error} />
     </>
   )

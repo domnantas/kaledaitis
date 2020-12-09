@@ -7,6 +7,7 @@ export const QUERY = gql`
     user: user(id: $id) {
       name
       sharedWith {
+        id
         name
       }
       takenFrom {
@@ -19,6 +20,14 @@ export const QUERY = gql`
 const CREATE_USER_MUTATION = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
     createUser(input: $input) {
+      id
+    }
+  }
+`
+
+const TAKE_FROM_USER_MUTATION = gql`
+  mutation TakeFromUserMutation($id: String!, $input: takeFromUserInput!) {
+    takeFromUser(id: $id, input: $input) {
       id
     }
   }
@@ -45,19 +54,47 @@ export const Success = ({ user, id }) => {
     createUser({ variables: { input } })
   }
 
+  const [takeFromUser, { takeFromUserLoading }] = useMutation(
+    TAKE_FROM_USER_MUTATION
+  )
+
+  const onTakeClick = () => {
+    takeFromUser({ variables: { id: currentUserId, input: { id } } })
+  }
+
+  const alreadyTaken = () =>
+    user.sharedWith.some(
+      (sharedWithUser) => sharedWithUser.id === currentUserId
+    )
+
   return (
     <>
-      <p>Vardas: {user.name}</p>
-      <p>Šio kalėdaičio atsilauže: {JSON.stringify(user.sharedWith)}</p>
+      <h1>{user.name}</h1>
+      <p>
+        Šio kalėdaičio atsilauže:{' '}
+        {user.sharedWith.length
+          ? user.sharedWith.map((user) => user.name)
+          : 'niekas'}
+      </p>
       {id === currentUserId && (
-        <p>Tu atsilaužei šiu kalėdaičių: {JSON.stringify(user.takenFrom)}</p>
+        <p>
+          Tu atsilaužei šiu kalėdaičių:{' '}
+          {user.takenFrom.length
+            ? user.takenFrom.map((user) => user.name)
+            : 'neatsilaužei dar'}
+        </p>
       )}
       {id !== currentUserId && (
         <>
           {!currentUserId && (
             <UserForm onSave={onSave} loading={loading} error={error} />
           )}
-          <button disabled={!currentUserId}>Atsilaužti</button>
+          <button
+            disabled={!currentUserId || takeFromUserLoading || alreadyTaken()}
+            onClick={onTakeClick}
+          >
+            {alreadyTaken() ? 'Jau atsilaužei šito' : 'Atsilaužti'}
+          </button>
         </>
       )}
     </>

@@ -16,7 +16,7 @@ const UserForm = (props) => {
     <Form onSubmit={onSubmit} error={props.error}>
       <FormError error={props.error} />
 
-      <Label name="name">Name</Label>
+      <Label name="name">Vardas</Label>
       <TextField
         name="name"
         defaultValue={props.user?.name}
@@ -24,7 +24,7 @@ const UserForm = (props) => {
       />
       <FieldError name="name" />
 
-      <Submit disabled={props.loading}>Save</Submit>
+      <Submit disabled={props.loading}>Išsaugoti</Submit>
     </Form>
   )
 }

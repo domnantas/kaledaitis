@@ -26,7 +26,7 @@ export const takeFromUser = ({ id, input }) => {
   if (id === input.id) throw Error('Cannot take from yourself')
   return db.user.update({
     data: { takenFrom: { connect: { id: input.id } } },
-    where: { id: id },
+    where: { id },
   })
 }
 
