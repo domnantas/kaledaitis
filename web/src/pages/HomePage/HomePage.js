@@ -1,7 +1,10 @@
 import { useMutation } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 
+import Grid from './Grid/Grid'
 import UserForm from 'src/components/UserForm'
+import Kaledaitis from './assets/Kaledaitis'
+import HeaderIcon from './assets/HeaderIcon'
 
 const CREATE_USER_MUTATION = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
@@ -29,10 +32,24 @@ const HomePage = () => {
     createUser({ variables: { input } })
   }
 
+  const [stage, setStage] = React.useState('landing')
+
   return (
     <>
-      <h1>Kalėdaitis</h1>
-      <UserForm onSave={onSave} loading={loading} error={error} />
+      <HeaderIcon />
+      <Grid>
+        <div>
+          {stage === 'landing' && <>artimieji per šventes per toli?</>}
+          {stage === 'vardas' && (
+            <>
+              kas siunčia kalėdaitį?
+              <UserForm onSave={onSave} loading={loading} error={error} />
+            </>
+          )}
+        </div>
+        <Kaledaitis setStage={setStage} />
+        <div>{stage === 'landing' && <>pasidalink su jais kalėdaičiu!</>}</div>
+      </Grid>
     </>
   )
 }

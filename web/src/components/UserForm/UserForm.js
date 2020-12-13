@@ -2,7 +2,6 @@ import {
   Form,
   FormError,
   FieldError,
-  Label,
   TextField,
   Submit,
 } from '@redwoodjs/forms'
@@ -16,9 +15,9 @@ const UserForm = (props) => {
     <Form onSubmit={onSubmit} error={props.error}>
       <FormError error={props.error} />
 
-      <Label name="name">Vardas</Label>
       <TextField
         name="name"
+        placeholder="Įrašyk savo vardą čia"
         defaultValue={props.user?.name}
         validation={{ required: true }}
       />
