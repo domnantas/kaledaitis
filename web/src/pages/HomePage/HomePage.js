@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 import { useMutation } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 
@@ -5,6 +7,7 @@ import Grid from './Grid/Grid'
 import UserForm from 'src/components/UserForm'
 import Kaledaitis from './assets/Kaledaitis'
 import HeaderIcon from './assets/HeaderIcon'
+import AboutUsModal from './AboutUsModal/AboutUsModal'
 
 const CREATE_USER_MUTATION = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
@@ -16,7 +19,7 @@ const CREATE_USER_MUTATION = gql`
 
 const HomePage = () => {
   // If I already have an user (kaledaitis), redirect to UserPage
-  React.useEffect(() => {
+  useEffect(() => {
     const currentUserId = localStorage.getItem('userId')
     if (currentUserId) navigate(routes.user({ id: currentUserId }))
   })
@@ -32,11 +35,28 @@ const HomePage = () => {
     createUser({ variables: { input } })
   }
 
-  const [stage, setStage] = React.useState('landing')
+  const [stage, setStage] = useState('landing')
+  const [isModalVisible, setIsModalVisible] = useState(true)
+
+  const closeModal = () => {
+    setIsModalVisible(false)
+  }
+
+  const cycleStages = () => {
+    setStage(() => {
+      switch (stage) {
+        case 'landing':
+          return 'vardas'
+        default:
+          return 'landing'
+      }
+    })
+  }
 
   return (
     <>
       <HeaderIcon />
+      {isModalVisible && <AboutUsModal closeModal={closeModal} />}
       <Grid>
         <div>
           {stage === 'landing' && <>artimieji per šventes per toli?</>}
@@ -47,7 +67,7 @@ const HomePage = () => {
             </>
           )}
         </div>
-        <Kaledaitis setStage={setStage} />
+        <Kaledaitis updateStage={cycleStages} />
         <div>{stage === 'landing' && <>pasidalink su jais kalėdaičiu!</>}</div>
       </Grid>
     </>

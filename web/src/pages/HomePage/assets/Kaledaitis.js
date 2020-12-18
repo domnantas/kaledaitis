@@ -1,6 +1,6 @@
 import './Kaledaitis.css'
 
-const Kaledaitis = ({ setStage }) => {
+const Kaledaitis = ({ updateStage }) => {
   return (
     <svg
       width="337"
@@ -9,7 +9,7 @@ const Kaledaitis = ({ setStage }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="kaledaitis"
-      onClick={() => setStage('vardas')}
+      onClick={updateStage}
     >
       <path
         d="M12.428 82.2451L283.915 7.24787L328.64 540.726L66.0387 650.15L12.428 82.2451Z"

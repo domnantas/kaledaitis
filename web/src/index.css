@@ -3,3 +3,7 @@
 * {
   font-family: 'DM Serif Display', serif;
 }
+
+#redwood-app {
+  height: 100%;
+}
