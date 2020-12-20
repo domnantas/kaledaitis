@@ -6,8 +6,10 @@ import { navigate, routes } from '@redwoodjs/router'
 import Grid from './Grid/Grid'
 import UserForm from 'src/components/UserForm'
 import Kaledaitis from './assets/Kaledaitis'
+import Footer from 'src/components/Footer/Footer'
 import HeaderIcon from './assets/HeaderIcon'
 import AboutUsModal from './AboutUsModal/AboutUsModal'
+import './HomePage.css'
 
 const CREATE_USER_MUTATION = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
@@ -36,7 +38,11 @@ const HomePage = () => {
   }
 
   const [stage, setStage] = useState('landing')
-  const [isModalVisible, setIsModalVisible] = useState(true)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const openModal = () => {
+    setIsModalVisible(true)
+  }
 
   const closeModal = () => {
     setIsModalVisible(false)
@@ -55,21 +61,26 @@ const HomePage = () => {
 
   return (
     <>
-      <HeaderIcon />
-      {isModalVisible && <AboutUsModal closeModal={closeModal} />}
-      <Grid>
-        <div>
-          {stage === 'landing' && <>artimieji per šventes per toli?</>}
-          {stage === 'vardas' && (
-            <>
-              kas siunčia kalėdaitį?
-              <UserForm onSave={onSave} loading={loading} error={error} />
-            </>
-          )}
-        </div>
-        <Kaledaitis updateStage={cycleStages} />
-        <div>{stage === 'landing' && <>pasidalink su jais kalėdaičiu!</>}</div>
-      </Grid>
+      <div className="home-page">
+        <HeaderIcon />
+        {isModalVisible && <AboutUsModal closeModal={closeModal} />}
+        <Grid>
+          <div>
+            {stage === 'landing' && <>artimieji per šventes per toli?</>}
+            {stage === 'vardas' && (
+              <>
+                kas siunčia kalėdaitį?
+                <UserForm onSave={onSave} loading={loading} error={error} />
+              </>
+            )}
+          </div>
+          <Kaledaitis updateStage={cycleStages} />
+          <div>
+            {stage === 'landing' && <>pasidalink su jais kalėdaičiu!</>}
+          </div>
+        </Grid>
+        <Footer openAboutUsModal={openModal} />
+      </div>
     </>
   )
 }

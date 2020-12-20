@@ -4,9 +4,11 @@ html, body {
 }
 
 .Grid {
-  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
-  background: linear-gradient(180deg, rgba(112, 197, 249, 0.7) 0%, rgba(198, 142, 223, 0.252) 71.35%, rgba(181, 136, 231, 0.357891) 81.25%, rgba(126, 115, 255, 0.7) 100%)
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
