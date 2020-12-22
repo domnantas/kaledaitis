@@ -75,7 +75,7 @@ const HomePage = () => {
               </>
             )}
           </div>
-          <Kaledaitis updateStage={cycleStages} />
+          {/* <Kaledaitis updateStage={cycleStages} /> */}
           <div>
             {stage === 'landing' && <>pasidalink su jais kalėdaičiu!</>}
           </div>

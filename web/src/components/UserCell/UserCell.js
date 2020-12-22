@@ -70,12 +70,14 @@ export const Success = ({ user, id }) => {
   return (
     <>
       <h1>{user.name}</h1>
-      <p>
-        Šio kalėdaičio atsilauže:{' '}
-        {user.sharedWith.length
-          ? user.sharedWith.map((user) => user.name)
-          : 'niekas'}
-      </p>
+      {(id === currentUserId || alreadyTaken()) && (
+        <p>
+          Šio kalėdaičio atsilauže:{' '}
+          {user.sharedWith.length
+            ? user.sharedWith.map((user) => user.name)
+            : 'niekas'}
+        </p>
+      )}
       {id === currentUserId && (
         <p>
           Tu atsilaužei šiu kalėdaičių:{' '}
