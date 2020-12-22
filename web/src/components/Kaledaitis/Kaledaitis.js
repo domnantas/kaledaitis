@@ -1,8 +1,16 @@
 import { useRef } from 'react'
 import { Canvas, useFrame } from 'react-three-fiber'
+import useTexture from 'src/hooks/useTexture'
 import './Kaledaitis.css'
 
+import displacement from 'src/assets/displacement.png'
+import normal from 'src/assets/normal.png'
+
 const KaledaitisBox = () => {
+  // const displacementTexture = useLoader(THREE.TextureLoader, displacement)
+  const displacementTexture = useTexture(displacement)
+  const normalTexture = useTexture(normal)
+
   const mesh = useRef()
   useFrame(() => {
     mesh.current.rotation.x = mesh.current.rotation.y += 0.01
@@ -17,7 +25,11 @@ const KaledaitisBox = () => {
       // onPointerOut={(event) => setHover(false)}
     >
       <boxBufferGeometry args={[3, 4, 0.08]} />
-      <meshStandardMaterial color="pink" />
+      <meshStandardMaterial
+        color="pink"
+        displacementMap={displacementTexture}
+        normalMap={normalTexture}
+      />
     </mesh>
   )
 }
@@ -26,18 +38,8 @@ const Kaledaitis = () => {
   return (
     <div className="kaledaitis-container">
       <Canvas>
-        <ambientLight intensity={1} />
-        {/* <rectAreaLight
-          width={6}
-          height={6}
-          brightness={1000}
-          color={'blue'}
-          position={[4, 0, 0]}
-          lookAt={[0, 0, 0]}
-          penumbra={1}
-          castShadow
-        /> */}
-        <pointLight position={[3, 0, 0]} color={'white'} />
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[8, 2, 0]} />
         <KaledaitisBox />
       </Canvas>
     </div>
