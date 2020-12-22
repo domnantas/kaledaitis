@@ -1,36 +1,36 @@
 import { useRef } from 'react'
-import { Canvas, useFrame } from 'react-three-fiber'
-import useTexture from 'src/hooks/useTexture'
+import { Canvas, useFrame, useLoader } from 'react-three-fiber'
+import * as THREE from 'three'
 import './Kaledaitis.css'
 
 import displacement from 'src/assets/displacement.png'
 import normal from 'src/assets/normal.png'
+import { Suspense } from 'react'
+import { Box } from 'drei'
 
 const KaledaitisBox = () => {
-  // const displacementTexture = useLoader(THREE.TextureLoader, displacement)
-  const displacementTexture = useTexture(displacement)
-  const normalTexture = useTexture(normal)
+  const displacementTexture = useLoader(THREE.TextureLoader, displacement)
+  const normalTexture = useLoader(THREE.TextureLoader, normal)
 
   const mesh = useRef()
   useFrame(() => {
     mesh.current.rotation.x = mesh.current.rotation.y += 0.01
   })
   return (
-    <mesh
-      position={[0, 0, 0]}
-      ref={mesh}
-      // scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
-      // onClick={(event) => setActive(!active)}
-      // onPointerOver={(event) => setHover(true)}
-      // onPointerOut={(event) => setHover(false)}
-    >
-      <boxBufferGeometry args={[3, 4, 0.08]} />
+    <Box ref={mesh} args={[3, 4, 0.08, 1024, 1024]}>
+      <meshStandardMaterial attachArray="material" color="pink" />
+      <meshStandardMaterial attachArray="material" color="pink" />
+      <meshStandardMaterial attachArray="material" color="pink" />
+      <meshStandardMaterial attachArray="material" color="pink" />
       <meshStandardMaterial
+        attachArray="material"
         color="pink"
         displacementMap={displacementTexture}
+        displacementScale={0.1}
         normalMap={normalTexture}
       />
-    </mesh>
+      <meshStandardMaterial attachArray="material" color="pink" />
+    </Box>
   )
 }
 
@@ -38,9 +38,13 @@ const Kaledaitis = () => {
   return (
     <div className="kaledaitis-container">
       <Canvas>
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[8, 2, 0]} />
-        <KaledaitisBox />
+        <Suspense fallback={null}>
+          <pointLight intensity={1} position={[7, 5, 1]} />
+          <ambientLight intensity={0.1} />
+          <directionalLight position={[8, 2, 0]} />
+          <hemisphereLight intensity={0.2} />
+          <KaledaitisBox />
+        </Suspense>
       </Canvas>
     </div>
   )
