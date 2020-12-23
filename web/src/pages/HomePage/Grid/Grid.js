@@ -16,7 +16,7 @@ const Grid = (props) => {
         src="src/assets/kaledaitis.png"
         ref={kaledaitisRef}
         onClick={props.cycleStages}
-        style="max-height: 70vh;"
+        style={{ maxHeight: '70vh' }}
       />
       {/* <Kaledaitis /> */}
       {props.children[1]}
