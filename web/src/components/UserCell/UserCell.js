@@ -73,7 +73,7 @@ export const Success = ({ user, id }) => {
       {(id === currentUserId || alreadyTaken()) && (
         <div>
           tavo kalėdaičio atsilaužė:{'\n'}
-          {user.sharedWith.length && (
+          {!!user.sharedWith.length && (
             <ul>
               {user.sharedWith.map((user) => (
                 <li key={user.name}>{user.name}</li>
