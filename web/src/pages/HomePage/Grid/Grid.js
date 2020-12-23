@@ -1,11 +1,24 @@
 import './Grid.css'
-import Kaledaitis from 'src/pages/HomePage/assets/Kaledaitis'
+import VanillaTilt from 'vanilla-tilt'
+import { useEffect, useRef } from 'react'
 
 const Grid = (props) => {
+  const kaledaitisRef = useRef()
+
+  useEffect(() => {
+    VanillaTilt.init(kaledaitisRef.current)
+  })
+
   return (
     <div className="Grid">
       {props.children[0]}
-      <Kaledaitis updateStage={props.cycleStages} />
+      <img
+        src="src/assets/kaledaitis.png"
+        ref={kaledaitisRef}
+        onClick={props.cycleStages}
+        style="max-height: 70vh;"
+      />
+      {/* <Kaledaitis /> */}
       {props.children[1]}
     </div>
   )
