@@ -6,7 +6,6 @@ import { navigate, routes } from '@redwoodjs/router'
 import Grid from './Grid/Grid'
 import UserForm from 'src/components/UserForm'
 import Footer from 'src/components/Footer/Footer'
-import HeaderIcon from './assets/HeaderIcon'
 import AboutUsModal from './AboutUsModal/AboutUsModal'
 import DefaultLayout from 'src/layouts/DefaultLayout/DefaultLayout'
 import './HomePage.css'
@@ -62,7 +61,6 @@ const HomePage = () => {
   return (
     <DefaultLayout>
       <div className="home-page">
-        <HeaderIcon />
         {isModalVisible && <AboutUsModal closeModal={closeModal} />}
         <Grid cycleStages={cycleStages}>
           <div>

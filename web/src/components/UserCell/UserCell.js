@@ -69,10 +69,12 @@ export const Success = ({ user, id }) => {
 
   return (
     <>
-      <h1>{user.name}</h1>
+      {id !== currentUserId && (
+        <h1>{user.name} su tavimi pasidalino kalėdaičiu!</h1>
+      )}
       {(id === currentUserId || alreadyTaken()) && (
         <div>
-          tavo kalėdaičio atsilaužė:{'\n'}
+          <h2>tavo kalėdaičio atsilaužė:</h2>
           {!!user.sharedWith.length && (
             <ul>
               {user.sharedWith.map((user) => (
@@ -87,9 +89,11 @@ export const Success = ({ user, id }) => {
       {id === currentUserId && (
         <p>
           Tu atsilaužei šiu kalėdaičių:{' '}
-          {user.takenFrom.length
-            ? user.takenFrom.map((user) => user.name)
-            : 'neatsilaužei dar'}
+          {user.takenFrom.length ? (
+            user.takenFrom.map((user) => user.name)
+          ) : (
+            <div>neatsilaužei dar</div>
+          )}
         </p>
       )}
       {id !== currentUserId && (
