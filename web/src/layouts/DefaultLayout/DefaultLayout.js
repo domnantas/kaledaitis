@@ -5,7 +5,7 @@ const DefaultLayout = ({ children }) => {
   return (
     <>
       <Clouds />
-      <Kaledaitis />
+      {/* <Kaledaitis /> */}
       {children}
     </>
   )

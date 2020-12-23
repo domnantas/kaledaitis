@@ -5,7 +5,6 @@ import { navigate, routes } from '@redwoodjs/router'
 
 import Grid from './Grid/Grid'
 import UserForm from 'src/components/UserForm'
-import Kaledaitis from './assets/Kaledaitis'
 import Footer from 'src/components/Footer/Footer'
 import HeaderIcon from './assets/HeaderIcon'
 import AboutUsModal from './AboutUsModal/AboutUsModal'
@@ -65,7 +64,7 @@ const HomePage = () => {
       <div className="home-page">
         <HeaderIcon />
         {isModalVisible && <AboutUsModal closeModal={closeModal} />}
-        <Grid>
+        <Grid cycleStages={cycleStages}>
           <div>
             {stage === 'landing' && <>artimieji per šventes per toli?</>}
             {stage === 'vardas' && (
