@@ -71,12 +71,18 @@ export const Success = ({ user, id }) => {
     <>
       <h1>{user.name}</h1>
       {(id === currentUserId || alreadyTaken()) && (
-        <p>
-          Šio kalėdaičio atsilauže:{' '}
-          {user.sharedWith.length
-            ? user.sharedWith.map((user) => user.name)
-            : 'niekas'}
-        </p>
+        <div>
+          tavo kalėdaičio atsilaužė:{'\n'}
+          {user.sharedWith.length && (
+            <ul>
+              {user.sharedWith.map((user) => (
+                <li key={user.name}>{user.name}</li>
+              ))}
+            </ul>
+          )}
+          {!user.sharedWith.length &&
+            'čia matysi vardus tų, kurie\natsilauš tavo kaledaičio.'}
+        </div>
       )}
       {id === currentUserId && (
         <p>
