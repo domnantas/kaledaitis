@@ -9,12 +9,10 @@ const Clouds = () => {
   const radius = 8
 
   const uniforms = {
-    uTopColor: { value: new Color('#4b9fe3') },
-    uBottomColor: { value: new Color('#c68edf') },
-    uSpot1Color: { value: new Color('#7d72ff') },
-    uSpot1Position: { value: [0.4, 0.7] },
-    uSpot2Color: { value: new Color('#f59578') },
-    uSpot2Position: { value: [0.4, 0.4] },
+    uTopColor: { value: new Color('#243c5e') },
+    uBottomColor: { value: new Color('#ac73bf') },
+    uSpot1Color: { value: new Color('#d19daa') },
+    uSpot1Position: { value: [0.4, 0.3] },
   }
 
   return (
