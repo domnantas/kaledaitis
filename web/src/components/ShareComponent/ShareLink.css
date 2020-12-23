@@ -1,0 +1,14 @@
+
+.copy-link-box {
+  cursor: pointer;
+  display: flex;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  padding: 9px 13px 7px 9px;
+  color: #000000;
+  box-sizing: border-box;
+}
+
+.copy-link-box svg {
+  padding-right: 12px;
+}

@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { useMutation } from '@redwoodjs/web'
 
 import UserForm from 'src/components/UserForm'
+import Grid from 'src/pages/HomePage/Grid/Grid'
+import ShareLink from '../ShareComponent/ShareLink'
 
 export const QUERY = gql`
   query FIND_USER_BY_ID($id: String!) {
@@ -39,9 +42,11 @@ export const Empty = () => <div>User not found</div>
 
 export const Success = ({ user, id }) => {
   // If I already have an user (kaledaitis), do not ask for name
-  const [currentUserId, setCurrentUserId] = React.useState(
+  const [currentUserId, setCurrentUserId] = useState(
     localStorage.getItem('userId')
   )
+
+  const [currentUserName, setCurrentUserName] = useState('')
 
   const [createUser, { loading, error }] = useMutation(CREATE_USER_MUTATION, {
     onCompleted: (response) => {
@@ -51,6 +56,7 @@ export const Success = ({ user, id }) => {
   })
 
   const onSave = (input) => {
+    setCurrentUserName(input.name)
     createUser({ variables: { input } })
   }
 
@@ -67,11 +73,12 @@ export const Success = ({ user, id }) => {
       (sharedWithUser) => sharedWithUser.id === currentUserId
     )
 
-  return (
-    <>
+  const Left = () => (
+    <div>
       {id !== currentUserId && (
         <h1>{user.name} su tavimi pasidalino kalėdaičiu!</h1>
       )}
+
       {(id === currentUserId || alreadyTaken()) && (
         <div>
           <h2>tavo kalėdaičio atsilaužė:</h2>
@@ -86,29 +93,34 @@ export const Success = ({ user, id }) => {
             'čia matysi vardus tų, kurie\natsilauš tavo kaledaičio.'}
         </div>
       )}
-      {id === currentUserId && (
-        <p>
-          Tu atsilaužei šiu kalėdaičių:{' '}
-          {user.takenFrom.length ? (
-            user.takenFrom.map((user) => user.name)
-          ) : (
-            <div>neatsilaužei dar</div>
-          )}
-        </p>
-      )}
+    </div>
+  )
+
+  const Right = () => (
+    <>
+      {id === currentUserId && <ShareLink />}
       {id !== currentUserId && (
-        <>
-          {!currentUserId && (
+        <div>
+          <h2>kas laužia kalėdaitį?</h2>
+          {!currentUserId && !currentUserName && (
             <UserForm onSave={onSave} loading={loading} error={error} />
           )}
+          {!!currentUserName && <div>{currentUserName}</div>}
           <button
             disabled={!currentUserId || takeFromUserLoading || alreadyTaken()}
             onClick={onTakeClick}
           >
             {alreadyTaken() ? 'Jau atsilaužei šito' : 'Atsilaužti'}
           </button>
-        </>
+        </div>
       )}
     </>
+  )
+
+  return (
+    <Grid>
+      <Left />
+      <Right />
+    </Grid>
   )
 }
