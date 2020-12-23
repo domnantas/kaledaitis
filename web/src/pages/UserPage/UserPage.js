@@ -49,7 +49,7 @@ const UserPage = ({ id }) => {
           <UserCell id={id} />
         </div>
         <div>
-          <h2>dalinkis šia nuoroda su artimaisiais</h2>
+          <h2>dalinkis šia nuoroda su artimaisiais:</h2>
           <div className="copy-link-box">
             <CopyIcon />
             {window.location.href}
