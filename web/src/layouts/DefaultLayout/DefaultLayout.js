@@ -20,7 +20,7 @@ const DefaultLayout = ({ children }) => {
     <>
       <HeaderIcon />
       <Clouds />
-      {/* <Kaledaitis /> */}
+      <Kaledaitis />
       {children}
       <Footer openAboutUsModal={openModal} />
       {isModalVisible && <AboutUsModal closeModal={closeModal} />}
