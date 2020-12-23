@@ -18,7 +18,7 @@ const DefaultLayout = ({ children }) => {
   return (
     <>
       <Clouds />
-      {/* <Kaledaitis /> */}
+      <Kaledaitis />
       {children}
       <Footer openAboutUsModal={openModal} />
       {isModalVisible && <AboutUsModal closeModal={closeModal} />}
