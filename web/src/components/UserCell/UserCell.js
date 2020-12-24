@@ -48,7 +48,7 @@ export const Success = ({ user, id }) => {
 
     useLayoutEffect(() => {
       function updateScreenSize() {
-        setScreenSize([window.innerWidth, window.innerHeight])
+        setScreenSize([window.innerWidth])
       }
       window.addEventListener('resize', updateScreenSize)
       updateScreenSize()
