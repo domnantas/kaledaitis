@@ -104,6 +104,45 @@ export const Success = ({ user, id }) => {
     }
   }, [])
 
+  const [showMobileList, setShowMobileList] = useState(false)
+
+  const CloseButton = () => (
+    <svg
+      width="24"
+      height="22"
+      viewBox="0 0 24 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="close-btn"
+      onClick={() => setShowMobileList(false)}
+    >
+      <path d="M1 1L23 21" stroke="black" />
+      <path d="M23 1L1 21" stroke="black" />
+    </svg>
+  )
+
+  const MobileList = () => (
+    <div className="mobile-list">
+      <CloseButton />
+      <h2>šio kalėdaičio atsilaužė:</h2>
+      {!!user.sharedWith.length && (
+        <ul className="list">
+          {user.sharedWith.map((user) => (
+            <li className="list-item" key={user.id}>
+              {user.name}{' '}
+            </li>
+          ))}
+        </ul>
+      )}
+      {!user.sharedWith.length && (
+        <>
+          <p>čia matysi vardus tų, kurie atsilauš tavo kaledaičio.</p>
+          <p>būk kantrus!</p>
+        </>
+      )}
+    </div>
+  )
+
   const Left = () => (
     <div>
       {id !== currentUserId && (
@@ -119,7 +158,7 @@ export const Success = ({ user, id }) => {
             <ul className="list">
               {user.sharedWith.map((user) => (
                 <li className="list-item" key={user.id}>
-                  <i>{user.name}</i>
+                  {user.name}
                 </li>
               ))}
             </ul>
@@ -130,6 +169,16 @@ export const Success = ({ user, id }) => {
             </p>
           )}
         </div>
+      )}
+      {(id === currentUserId || alreadyTaken()) && width < 768 && (
+        <h2
+          className="mobile-kas-atsilauze"
+          onClick={() => setShowMobileList(true)}
+        >
+          {alreadyTaken()
+            ? 'kas dar atsilaužė šio kalėdaičio?'
+            : 'kas atsilaužė tavo kalėdaičio?'}
+        </h2>
       )}
     </div>
   )
@@ -155,10 +204,13 @@ export const Success = ({ user, id }) => {
   )
 
   return (
-    <Grid>
-      <Left />
-      <Kaledaitis isBorked={isBorked} onClick={onTakeClick} />
-      <Right />
-    </Grid>
+    <>
+      <Grid>
+        <Left />
+        <Kaledaitis isBorked={isBorked} onClick={onTakeClick} />
+        <Right />
+      </Grid>
+      {width < 768 && showMobileList && <MobileList />}
+    </>
   )
 }
