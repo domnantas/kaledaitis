@@ -9,6 +9,7 @@ import Footer from 'src/components/Footer/Footer'
 import AboutUsModal from './AboutUsModal/AboutUsModal'
 import DefaultLayout from 'src/layouts/DefaultLayout/DefaultLayout'
 import './HomePage.css'
+import Kaledaitis from 'src/components/Kaledaitis/Kaledaitis'
 
 const CREATE_USER_MUTATION = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
@@ -72,7 +73,7 @@ const HomePage = () => {
               </>
             )}
           </div>
-          {/* <Kaledaitis updateStage={cycleStages} /> */}
+          <Kaledaitis onClick={cycleStages} />
           <div>
             {stage === 'landing' && <>pasidalink su jais kalėdaičiu!</>}
           </div>

@@ -4,6 +4,7 @@ import { useMutation } from '@redwoodjs/web'
 import UserForm from 'src/components/UserForm'
 import Grid from 'src/pages/HomePage/Grid/Grid'
 import ShareLink from '../ShareComponent/ShareLink'
+import Kaledaitis from '../Kaledaitis/Kaledaitis'
 
 export const QUERY = gql`
   query FIND_USER_BY_ID($id: String!) {
@@ -120,6 +121,7 @@ export const Success = ({ user, id }) => {
   return (
     <Grid>
       <Left />
+      <Kaledaitis isBroken />
       <Right />
     </Grid>
   )
