@@ -21,7 +21,10 @@ const Kaledaitis = (props) => {
             : 'src/assets/kaledaitis.png'
         }
         onClick={props.onClick}
-        style={{ maxHeight: '70vh', cursor: 'pointer' }}
+        style={{
+          maxHeight: '70vh',
+          cursor: props.isBroken ? 'default' : 'pointer',
+        }}
       />
     </div>
   )
