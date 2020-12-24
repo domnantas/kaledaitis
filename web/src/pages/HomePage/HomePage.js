@@ -60,7 +60,7 @@ const HomePage = () => {
         case 'landing':
           return 'vardas'
         case 'vardas':
-          return navigate(routes.user({ id: userId }))
+          return userName ? navigate(routes.user({ id: userId })) : 'vardas'
         default:
           return 'landing'
       }
