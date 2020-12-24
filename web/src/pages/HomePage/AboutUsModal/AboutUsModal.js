@@ -20,12 +20,11 @@ const AboutUsModal = ({ closeModal }) => (
     </div>
     <h2>kas? kaip? kodėl?</h2>
     <p>
-      Čia bus informacija apie projektą. Tai ne pelno siekinatis projektas,
-      skatinantis šiuo sunkiu, tačiau būtinu laikotarpiu, saugoti save ir savo
-      artimuosius ir dalintis kalėdaičiu virtualiai, taip išvengiant papildomo
-      pavojaus. Siųskite savo kalėdaičius draugams/giminėms/mylimiesiems ir
-      parodykit dėmesį saugiai. Čia bus informacija apie projektą. Tai ne pelno
-      siekinatis projektas,
+      Šventes šiemet sutinkame kiek neįprastu būdu, todėl ir kalėdaitis įgauna
+      naują formą! Dalinkis virtualiu kalėdaičiu su artimaisiais / draugais /
+      mylimaisiais, nesvarbu kuriam pasaulio krašte jie bebūtų 🌎 🌎 🌎
+      <div>*sudėtyje nėra gliuteno / tinkamas vartoti veganams</div>
+      <div>Dalinkis savo rūpesčiu saugiai!</div>
     </p>
   </div>
 )

@@ -13,10 +13,9 @@
 @media only screen and (min-width: 767px) {
     .modal {
         position: absolute;
-        top: 20%;
-        left: 50%;
-        margin: 15% auto;
-        transform: translateX(-50%);
+        margin: auto;
+        left: 0; right: 0; top: 50%;
+        transform: translateY(-50%);
     }
 }
 @media only screen and (max-width: 767px) {
@@ -33,11 +32,11 @@
     margin-bottom: 60px;
 }
 
-.modal p {
+.modal {
     font-family: 'Raleway', sans-serif;
     text-align: left;
     max-width: 680px;
-    margin: 0 auto;
+
 }
 
 .close-button {
