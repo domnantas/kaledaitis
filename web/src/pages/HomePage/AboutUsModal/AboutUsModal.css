@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 .modal {
+    top: 20%;
     left: 50%;
     transform: translateX(-50%);
     position: absolute;

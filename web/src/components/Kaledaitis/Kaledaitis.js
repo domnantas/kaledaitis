@@ -21,7 +21,7 @@ const Kaledaitis = (props) => {
         src={props.isBorked ? kaledaitisBorkedImg : kaledaitisImg}
         onClick={props.onClick}
         style={{
-          maxHeight: '70vh',
+          maxHeight: '50vh',
           cursor: props.isBorked ? 'default' : 'pointer',
         }}
       />
