@@ -17,3 +17,16 @@ h2 {
 #redwood-app {
   height: 100%;
 }
+
+.angeliukas {
+  position: absolute;
+  top: 5%;
+}
+
+.angeliukas-left {
+left: 20%
+}
+
+.angeliukas-right {
+  right: 20%;
+}

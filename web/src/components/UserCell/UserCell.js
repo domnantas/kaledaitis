@@ -5,6 +5,7 @@ import UserForm from 'src/components/UserForm'
 import Grid from 'src/components/Grid'
 import ShareLink from 'src/components/ShareComponent/ShareLink'
 import Kaledaitis from 'src/components/Kaledaitis'
+import './UserCell.css'
 
 export const QUERY = gql`
   query FIND_USER_BY_ID($id: String!) {
@@ -98,9 +99,11 @@ export const Success = ({ user, id }) => {
         <div>
           <h2>šio kalėdaičio atsilaužė:</h2>
           {!!user.sharedWith.length && (
-            <ul>
+            <ul className="list">
               {user.sharedWith.map((user) => (
-                <li key={user.id}>{user.name}</li>
+                <li className="list-item" key={user.id}>
+                  <i>{user.name}</i>
+                </li>
               ))}
             </ul>
           )}
