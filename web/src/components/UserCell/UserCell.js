@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMutation } from '@redwoodjs/web'
 
 import UserForm from 'src/components/UserForm'
@@ -57,6 +57,7 @@ export const Success = ({ user, id }) => {
   })
 
   const onSave = (input) => {
+    localStorage.setItem('name', input.name)
     setCurrentUserName(input.name)
     createUser({ variables: { input } })
   }
@@ -74,10 +75,20 @@ export const Success = ({ user, id }) => {
       (sharedWithUser) => sharedWithUser.id === currentUserId
     )
 
+  const [isBorked, setIsBorked] = useState(false)
+
+  useEffect(() => {
+    if (id === currentUserId) {
+      setIsBorked(true)
+    }
+  }, [])
+
   const Left = () => (
     <div>
       {id !== currentUserId && (
-        <h1>{user.name} su tavimi pasidalino kalėdaičiu!</h1>
+        <h1>
+          <i>{user.name}</i> su tavimi pasidalino kalėdaičiu!
+        </h1>
       )}
 
       {(id === currentUserId || alreadyTaken()) && (
@@ -106,7 +117,9 @@ export const Success = ({ user, id }) => {
           {!currentUserId && !currentUserName && (
             <UserForm onSave={onSave} loading={loading} error={error} />
           )}
-          {!!currentUserName && <div>{currentUserName}</div>}
+          {!!currentUserName && (
+            <div>spustelk kalėdaitį, norėdamas jo atsilaužti</div>
+          )}
           <button
             disabled={!currentUserId || takeFromUserLoading || alreadyTaken()}
             onClick={onTakeClick}
@@ -121,7 +134,7 @@ export const Success = ({ user, id }) => {
   return (
     <Grid>
       <Left />
-      <Kaledaitis isBorked />
+      <Kaledaitis isBorked={isBorked} setIsBorked={setIsBorked} />
       <Right />
     </Grid>
   )

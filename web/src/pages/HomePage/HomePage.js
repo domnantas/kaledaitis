@@ -24,20 +24,26 @@ const HomePage = () => {
   useEffect(() => {
     const currentUserId = localStorage.getItem('userId')
     if (currentUserId) navigate(routes.user({ id: currentUserId }))
-  })
+  }, [])
+
+  const [userId, setUserId] = useState('')
 
   const [createUser, { loading, error }] = useMutation(CREATE_USER_MUTATION, {
     onCompleted: (response) => {
       localStorage.setItem('userId', response.createUser.id)
-      navigate(routes.user({ id: response.createUser.id }))
+      setUserId(response.createUser.id)
     },
   })
 
+  const [userName, setUserName] = useState('')
+
   const onSave = (input) => {
+    setUserName(input.name)
     createUser({ variables: { input } })
   }
 
   const [stage, setStage] = useState('landing')
+
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const openModal = () => {
@@ -53,6 +59,8 @@ const HomePage = () => {
       switch (stage) {
         case 'landing':
           return 'vardas'
+        case 'vardas':
+          return navigate(routes.user({ id: userId }))
         default:
           return 'landing'
       }
@@ -69,14 +77,16 @@ const HomePage = () => {
             {stage === 'vardas' && (
               <>
                 kas siunčia kalėdaitį?
-                <UserForm onSave={onSave} loading={loading} error={error} />
+                {!userName && (
+                  <UserForm onSave={onSave} loading={loading} error={error} />
+                )}
               </>
             )}
+            {!!userName && <h2>{userName}</h2>}
           </div>
           <Kaledaitis onClick={cycleStages} />
-          <div>
-            {stage === 'landing' && <>pasidalink su jais kalėdaičiu!</>}
-          </div>
+          {stage === 'landing' && <div>pasidalink su jais kalėdaičiu!</div>}
+          {!!userId && <div>spustelk kalėdaitį, norėdamas juo pasidalinti</div>}
         </Grid>
         <Footer openAboutUsModal={openModal} />
       </div>

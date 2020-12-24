@@ -16,7 +16,7 @@ const Kaledaitis = (props) => {
   })
 
   return (
-    <div ref={kaledaitisRef}>
+    <div ref={kaledaitisRef} onClick={() => props.setIsBorked(true)}>
       <img
         src={props.isBorked ? kaledaitisBorkedImg : kaledaitisImg}
         onClick={props.onClick}
