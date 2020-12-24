@@ -26,6 +26,12 @@
         right: 0;
         top: 0;
     }
+
+    .kaskaipkodel {
+        position: absolute;
+        right: 10px;
+        transform: rotate(-90deg);
+    }
 }
 
 .modal h2 {
