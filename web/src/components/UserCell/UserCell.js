@@ -98,7 +98,7 @@ export const Success = ({ user, id }) => {
   )
 
   const Right = () => (
-    <>
+    <div>
       {id === currentUserId && <ShareLink />}
       {id !== currentUserId && (
         <div>
@@ -115,7 +115,7 @@ export const Success = ({ user, id }) => {
           </button>
         </div>
       )}
-    </>
+    </div>
   )
 
   return (
