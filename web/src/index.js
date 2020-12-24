@@ -5,10 +5,12 @@ import FatalErrorPage from 'src/pages/FatalErrorPage'
 import Routes from 'src/Routes'
 
 import './index.css'
+import Clouds from './components/Clouds/Clouds'
 
 ReactDOM.render(
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider>
+      <Clouds />
       <Routes />
     </RedwoodProvider>
   </FatalErrorBoundary>,

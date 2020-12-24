@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Clouds from 'src/components/Clouds'
 import Footer from 'src/components/Footer/Footer'
 import AboutUsModal from 'src/pages/HomePage/AboutUsModal/AboutUsModal'
 import HeaderIcon from 'src/pages/HomePage/assets/HeaderIcon'
@@ -18,7 +17,6 @@ const DefaultLayout = ({ children }) => {
   return (
     <>
       <HeaderIcon />
-      <Clouds />
       {children}
       <Footer openAboutUsModal={openModal} />
       {isModalVisible && <AboutUsModal closeModal={closeModal} />}
