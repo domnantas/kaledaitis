@@ -44,7 +44,8 @@ const ShareLink = ({ width }) => (
       onClick={() => navigator.clipboard.writeText(window.location.href)}
     >
       <CopyIcon />
-      {window.location.href}
+      {window.location.hostname}
+      {window.location.pathname}
     </div>
   </div>
 )
