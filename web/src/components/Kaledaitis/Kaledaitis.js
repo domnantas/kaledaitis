@@ -17,24 +17,14 @@ const Kaledaitis = (props) => {
 
   return (
     <div ref={kaledaitisRef}>
-      {props.isBorked ? (
-        <img
-          src={kaledaitisBorkedImg}
-          onClick={props.onClick}
-          style={{
-            maxHeight: '70vh',
-          }}
-        />
-      ) : (
-        <img
-          src={kaledaitisImg}
-          onClick={props.onClick}
-          style={{
-            maxHeight: '70vh',
-            cursor: 'pointer',
-          }}
-        />
-      )}
+      <img
+        src={props.isBorked ? kaledaitisBorkedImg : kaledaitisImg}
+        onClick={props.onClick}
+        style={{
+          maxHeight: '70vh',
+          cursor: props.isBorked ? 'default' : 'pointer',
+        }}
+      />
     </div>
   )
 }
