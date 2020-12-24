@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useMutation } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 
-import Grid from './Grid/Grid'
+import Grid from 'src/components/Grid'
 import UserForm from 'src/components/UserForm'
 import Footer from 'src/components/Footer/Footer'
 import AboutUsModal from './AboutUsModal/AboutUsModal'
