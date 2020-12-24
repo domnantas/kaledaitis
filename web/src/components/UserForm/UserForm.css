@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+.form {
+  display: flex;
+  height: 42px;
+}
+
+.input {
+  min-width: 260px;
+  height: 42px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 17px;
+  padding-left: 10px;
+  outline: none;
+  border: 1px solid black;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.submit {
+  margin-left: -30px;
+  border: 0;
+  font-size: 32px;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}

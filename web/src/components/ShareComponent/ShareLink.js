@@ -7,7 +7,6 @@ const CopyIcon = () => (
     viewBox="0 0 25 26"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    onClick={() => navigator.clipboard.writeText(window.location.href)}
   >
     <rect
       width="25"
@@ -38,13 +37,16 @@ const CopyIcon = () => (
 )
 
 const ShareLink = () => (
-  <>
+  <div className="share-link">
     <h2>dalinkis šia nuoroda su artimaisiais:</h2>
-    <div className="copy-link-box">
+    <div
+      className="copy-link-box"
+      onClick={() => navigator.clipboard.writeText(window.location.href)}
+    >
       <CopyIcon />
       {window.location.href}
     </div>
-  </>
+  </div>
 )
 
 export default ShareLink

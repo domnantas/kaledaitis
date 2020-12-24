@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useMutation } from '@redwoodjs/web'
+import { useQuery, useMutation } from '@redwoodjs/web'
 
 import UserForm from 'src/components/UserForm'
 import Grid from 'src/components/Grid'
@@ -57,7 +57,6 @@ export const Success = ({ user, id }) => {
   })
 
   const onSave = (input) => {
-    localStorage.setItem('name', input.name)
     setCurrentUserName(input.name)
     createUser({ variables: { input } })
   }
@@ -66,8 +65,12 @@ export const Success = ({ user, id }) => {
     TAKE_FROM_USER_MUTATION
   )
 
+  const { refetch } = useQuery(QUERY, { variables: { id } })
+
   const onTakeClick = () => {
+    setIsBorked(true)
     takeFromUser({ variables: { id: currentUserId, input: { id } } })
+    refetch()
   }
 
   const alreadyTaken = () =>
@@ -78,7 +81,7 @@ export const Success = ({ user, id }) => {
   const [isBorked, setIsBorked] = useState(false)
 
   useEffect(() => {
-    if (id === currentUserId) {
+    if (id === currentUserId || alreadyTaken()) {
       setIsBorked(true)
     }
   }, [])
@@ -93,16 +96,19 @@ export const Success = ({ user, id }) => {
 
       {(id === currentUserId || alreadyTaken()) && (
         <div>
-          <h2>tavo kalėdaičio atsilaužė:</h2>
+          <h2>šio kalėdaičio atsilaužė:</h2>
           {!!user.sharedWith.length && (
             <ul>
               {user.sharedWith.map((user) => (
-                <li key={user.name}>{user.name}</li>
+                <li key={user.id}>{user.name}</li>
               ))}
             </ul>
           )}
-          {!user.sharedWith.length &&
-            'čia matysi vardus tų, kurie\natsilauš tavo kaledaičio.'}
+          {!user.sharedWith.length && (
+            <p>
+              čia matysi vardus tų, kurie atsilauš tavo kaledaičio. būk kantrus!
+            </p>
+          )}
         </div>
       )}
     </div>
@@ -113,19 +119,16 @@ export const Success = ({ user, id }) => {
       {id === currentUserId && <ShareLink />}
       {id !== currentUserId && (
         <div>
-          <h2>kas laužia kalėdaitį?</h2>
+          {!currentUserId && <h2>kas laužia kalėdaitį?</h2>}
           {!currentUserId && !currentUserName && (
             <UserForm onSave={onSave} loading={loading} error={error} />
           )}
-          {!!currentUserName && (
-            <div>spustelk kalėdaitį, norėdamas jo atsilaužti</div>
+          {currentUserId && !isBorked && (
+            <h2>spustelk kalėdaitį, norėdamas jo atsilaužti</h2>
           )}
-          <button
-            disabled={!currentUserId || takeFromUserLoading || alreadyTaken()}
-            onClick={onTakeClick}
-          >
-            {alreadyTaken() ? 'Jau atsilaužei šito' : 'Atsilaužti'}
-          </button>
+          {!!currentUserId && isBorked && (
+            <h2>sėkmingai atsilaužei kalėdaičio!</h2>
+          )}
         </div>
       )}
     </div>
@@ -134,7 +137,7 @@ export const Success = ({ user, id }) => {
   return (
     <Grid>
       <Left />
-      <Kaledaitis isBorked={isBorked} setIsBorked={setIsBorked} />
+      <Kaledaitis isBorked={isBorked} onClick={onTakeClick} />
       <Right />
     </Grid>
   )

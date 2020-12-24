@@ -73,20 +73,24 @@ const HomePage = () => {
         {isModalVisible && <AboutUsModal closeModal={closeModal} />}
         <Grid cycleStages={cycleStages}>
           <div>
-            {stage === 'landing' && <>artimieji per šventes per toli?</>}
+            {stage === 'landing' && <h2>artimieji per šventes per toli?</h2>}
             {stage === 'vardas' && (
               <>
-                kas siunčia kalėdaitį?
+                <h2>kas siunčia kalėdaitį?</h2>
                 {!userName && (
                   <UserForm onSave={onSave} loading={loading} error={error} />
                 )}
               </>
             )}
-            {!!userName && <h2>{userName}</h2>}
+            {!!userName && (
+              <h2>
+                <i>{userName}</i>
+              </h2>
+            )}
           </div>
           <Kaledaitis onClick={cycleStages} />
-          {stage === 'landing' && <div>pasidalink su jais kalėdaičiu!</div>}
-          {!!userId && <div>spustelk kalėdaitį, norėdamas juo pasidalinti</div>}
+          {stage === 'landing' && <h2>pasidalink su jais kalėdaičiu!</h2>}
+          {!!userId && <h2>spustelk kalėdaitį, norėdamas juo pasidalinti</h2>}
         </Grid>
         <Footer openAboutUsModal={openModal} />
       </div>

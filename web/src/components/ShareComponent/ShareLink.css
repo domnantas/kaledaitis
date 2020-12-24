@@ -1,3 +1,8 @@
+.share-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 
 .copy-link-box {
   cursor: pointer;
@@ -6,9 +11,11 @@
   border: 1px solid #000000;
   padding: 9px 13px 7px 9px;
   color: #000000;
+  justify-content: space-between;
   box-sizing: border-box;
+  width: fit-content;
 }
 
 .copy-link-box svg {
-  padding-right: 12px;
+  padding-right: 20px;
 }

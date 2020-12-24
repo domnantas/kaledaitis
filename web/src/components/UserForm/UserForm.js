@@ -1,10 +1,6 @@
-import {
-  Form,
-  FormError,
-  FieldError,
-  TextField,
-  Submit,
-} from '@redwoodjs/forms'
+import { Form, FormError, TextField, Submit } from '@redwoodjs/forms'
+
+import './UserForm.css'
 
 const UserForm = (props) => {
   const onSubmit = (data) => {
@@ -12,18 +8,21 @@ const UserForm = (props) => {
   }
 
   return (
-    <Form onSubmit={onSubmit} error={props.error}>
+    <Form onSubmit={onSubmit} error={props.error} className="form">
       <FormError error={props.error} />
 
       <TextField
         name="name"
         placeholder="Įrašyk savo vardą čia"
         defaultValue={props.user?.name}
+        errorClassName="input input-error"
         validation={{ required: true }}
+        className="input"
       />
-      <FieldError name="name" />
 
-      <Submit disabled={props.loading}>Išsaugoti</Submit>
+      <Submit className="submit" disabled={props.loading}>
+        {'>'}
+      </Submit>
     </Form>
   )
 }

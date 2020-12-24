@@ -1,8 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 * {
   font-family: 'DM Serif Display', serif;
   font-weight: normal;
+}
+
+p {
+  font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+  font-size: 32px;
 }
 
 #redwood-app {
