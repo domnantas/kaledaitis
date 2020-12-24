@@ -16,6 +16,12 @@
   width: fit-content;
 }
 
+@media only screen and (max-width: 767px) {
+  .share-link {
+    align-items: center;
+  }
+}
+
 .copy-link-box svg {
   padding-right: 20px;
 }

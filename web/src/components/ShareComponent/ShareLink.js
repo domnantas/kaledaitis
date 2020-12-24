@@ -36,9 +36,9 @@ const CopyIcon = () => (
   </svg>
 )
 
-const ShareLink = () => (
+const ShareLink = ({ width }) => (
   <div className="share-link">
-    <h2>dalinkis šia nuoroda su artimaisiais:</h2>
+    <h2>dalinkis šia nuoroda {width > 768 ? 'su artimaisiais' : ''}:</h2>
     <div
       className="copy-link-box"
       onClick={() => navigator.clipboard.writeText(window.location.href)}

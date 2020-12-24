@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useLayoutEffect } from 'react'
 import { useQuery, useMutation } from '@redwoodjs/web'
 
 import UserForm from 'src/components/UserForm'
@@ -43,6 +43,23 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => <div>User not found</div>
 
 export const Success = ({ user, id }) => {
+  function useMediaQuery() {
+    const [screenSize, setScreenSize] = useState([0, 0])
+
+    useLayoutEffect(() => {
+      function updateScreenSize() {
+        setScreenSize([window.innerWidth, window.innerHeight])
+      }
+      window.addEventListener('resize', updateScreenSize)
+      updateScreenSize()
+      return () => window.removeEventListener('resize', updateScreenSize)
+    }, [])
+
+    return screenSize
+  }
+
+  const [width] = useMediaQuery()
+
   // If I already have an user (kaledaitis), do not ask for name
   const [currentUserId, setCurrentUserId] = useState(
     localStorage.getItem('userId')
@@ -95,7 +112,7 @@ export const Success = ({ user, id }) => {
         </h1>
       )}
 
-      {(id === currentUserId || alreadyTaken()) && (
+      {(id === currentUserId || alreadyTaken()) && width > 768 && (
         <div>
           <h2>šio kalėdaičio atsilaužė:</h2>
           {!!user.sharedWith.length && (
@@ -119,7 +136,7 @@ export const Success = ({ user, id }) => {
 
   const Right = () => (
     <div>
-      {id === currentUserId && <ShareLink />}
+      {id === currentUserId && <ShareLink width={width} />}
       {id !== currentUserId && (
         <div>
           {!currentUserId && <h2>kas laužia kalėdaitį?</h2>}
