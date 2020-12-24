@@ -1,6 +1,9 @@
 import VanillaTilt from 'vanilla-tilt'
 import { useEffect, useRef } from 'react'
 
+import kaledaitisImg from 'src/assets/kaledaitis.png'
+import kaledaitisBorkedImg from 'src/assets/kaledaitisborked.png'
+
 const Kaledaitis = (props) => {
   const kaledaitisRef = useRef()
 
@@ -16,7 +19,7 @@ const Kaledaitis = (props) => {
     <div ref={kaledaitisRef}>
       {props.isBorked ? (
         <img
-          src="src/assets/kaledaitisborked.png"
+          src={kaledaitisBorkedImg}
           onClick={props.onClick}
           style={{
             maxHeight: '70vh',
@@ -24,7 +27,7 @@ const Kaledaitis = (props) => {
         />
       ) : (
         <img
-          src="src/assets/kaledaitis.png"
+          src={kaledaitisImg}
           onClick={props.onClick}
           style={{
             maxHeight: '70vh',
