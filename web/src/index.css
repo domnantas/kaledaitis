@@ -23,6 +23,12 @@ h2 {
   top: 5%;
 }
 
+@media only screen and (max-width: 767px) {
+  .angeliukas {
+    display: none;
+  }
+}
+
 .angeliukas-left {
 left: 20%
 }

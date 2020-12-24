@@ -1,5 +1,5 @@
 html, body {
-  margin: 0;
+  margin: 0 10px;
   height: 100%;
 }
 
@@ -13,4 +13,10 @@ html, body {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+}
+
+@media only screen and (max-width: 767px) {
+  .Grid {
+    grid-template-columns: 1fr;
+  }
 }
